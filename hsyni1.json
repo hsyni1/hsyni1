@@ -42,12 +42,16 @@
     "final": "dns-remote",
     "static_ips": {
       "sky.rethinkdns.com": [
-        "104.17.148.22",
+        "188.114.99.0",
+        "188.114.98.0",
+        "2a06:98c1:3123::",
+        "2a06:98c1:3122::",
         "104.17.147.22",
+        "104.17.148.22",
         "188.114.96.3",
         "188.114.97.3",
-        "2a06:98c1:3121::3",
-        "2a06:98c1:3120::3"
+        "2a06:98c1:3120::3",
+        "2a06:98c1:3121::3"
       ]
     },
     "independent_cache": true
@@ -69,7 +73,7 @@
       "type": "mixed",
       "tag": "mixed-in",
       "listen": "127.0.0.1",
-      "listen_port": 12334,
+      "listen_port": 2334,
       "sniff": true,
       "sniff_override_destination": true
     },
@@ -77,7 +81,7 @@
       "type": "direct",
       "tag": "dns-in",
       "listen": "127.0.0.1",
-      "listen_port": 16450
+      "listen_port": 6450
     }
   ],
   "outbounds": [
@@ -107,13 +111,13 @@
       "tag": "ایران🇮🇷 § 0",
       "local_address": [
         "172.16.0.2/24",
-        "2606:4700:110:86b4:4ac5:eddd:6f5b:28dd/128"
+        "2606:4700:110:8230:dba5:4457:deae:4c96/128"
       ],
-      "private_key": "CHLM3o3OUPTubcFc+aqVZA1jJOxskObylQWEWPhBwXQ=",
-      "server": "162.159.192.58",
-      "server_port": 1002,
+      "private_key": "QITU5F75DJLSv0TBGbEYs3gmY2ulSfesRSlNllGH5EA=",
+      "server": "188.114.96.22",
+      "server_port": 3581,
       "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-      "reserved": "fNkQ",
+      "reserved": "QKEo",
       "mtu": 1330,
       "fake_packets": "10-20",
       "fake_packets_size": "20-60",
@@ -125,13 +129,13 @@
       "detour": "ایران🇮🇷 § 0",
       "local_address": [
         "172.16.0.2/24",
-        "2606:4700:110:8d2a:bd09:a9df:b3c2:cae7/128"
+        "2606:4700:110:8a5b:ddf2:3550:4d2a:d68a/128"
       ],
-      "private_key": "kDbjvfkHQXpRW1SL1siHsmSMlJVtL59u8nsvJkxvV0w=",
-      "server": "162.159.192.219",
-      "server_port": 864,
+      "private_key": "+Hluz697ThNVP9ayhgN0xGlQxCcpwfTjPtBmT9+Yu2E=",
+      "server": "162.159.195.68",
+      "server_port": 8319,
       "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
-      "reserved": "mYOj",
+      "reserved": "L4YL",
       "mtu": 1280
     },
     {
@@ -147,8 +151,8 @@
       "tag": "direct-fragment",
       "tls_fragment": {
         "enabled": true,
-        "size": "10-30",
-        "sleep": "2-8"
+        "size": "1-500",
+        "sleep": "0-500"
       }
     },
     {
@@ -162,6 +166,13 @@
   ],
   "route": {
     "rules": [
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "outbound": "direct"
+      },
       {
         "inbound": "dns-in",
         "outbound": "dns-out"
@@ -179,6 +190,22 @@
         "outbound": "select"
       }
     ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geoip-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geoip-ir.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geosite-ir.srs",
+        "update_interval": "120h0m0s"
+      }
+    ],
     "final": "select",
     "auto_detect_interface": true,
     "override_android_vpn": true
@@ -189,8 +216,8 @@
       "path": "clash.db"
     },
     "clash_api": {
-      "external_controller": "127.0.0.1:16756",
-      "secret": "ND7MuPl-76Jk5ZYf"
+      "external_controller": "127.0.0.1:6756",
+      "secret": "cTd08r8eiwqFg98l"
     }
   }
 }
